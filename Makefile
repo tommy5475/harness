@@ -40,14 +40,14 @@ build:
 	@mkdir -p $(BIN_DIR)
 	$(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME) $(CMD_DIR)
 
-## build-all: Cross-compile for linux/amd64, linux/arm64, and darwin/amd64
+## build-all: Cross-compile for linux/amd64, linux/arm64, darwin/amd64, and darwin/arm64
 .PHONY: build-all
 build-all:
 	@mkdir -p $(BIN_DIR)
 	GOOS=linux  GOARCH=amd64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-linux-amd64   $(CMD_DIR)
 	GOOS=linux  GOARCH=arm64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-linux-arm64   $(CMD_DIR)
 	GOOS=darwin GOARCH=amd64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-darwin-amd64  $(CMD_DIR)
-	# TODO: add darwin/arm64 (Apple Silicon) once I get a chance to test it
+	GOOS=darwin GOARCH=arm64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-darwin-arm64  $(CMD_DIR)
 
 ## test: Run unit tests with race detector
 .PHONY: test
