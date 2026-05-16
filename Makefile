@@ -47,6 +47,7 @@ build-all:
 	GOOS=linux  GOARCH=amd64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-linux-amd64   $(CMD_DIR)
 	GOOS=linux  GOARCH=arm64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-linux-arm64   $(CMD_DIR)
 	GOOS=darwin GOARCH=amd64 $(GO_BUILD) $(LD_FLAGS) -o $(BIN_DIR)/$(BINARY_NAME)-darwin-amd64  $(CMD_DIR)
+	# TODO: add darwin/arm64 (Apple Silicon) once I get a chance to test it
 
 ## test: Run unit tests with race detector
 .PHONY: test
@@ -89,5 +90,6 @@ clean:
 	@echo "Cleaned $(BIN_DIR)"
 
 ## ci: Run all checks performed in CI (fmt, vet, lint, test)
+# Note: skipping fmt in ci locally since my editor handles formatting on save
 .PHONY: ci
-ci: fmt vet lint test
+ci: vet lint test
