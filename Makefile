@@ -61,6 +61,8 @@ test-cover:
 	$(GO_TEST) -race -coverprofile=$(BIN_DIR)/coverage.out -covermode=atomic $(PKG_LIST)
 	$(GO_CMD) tool cover -html=$(BIN_DIR)/coverage.out -o $(BIN_DIR)/coverage.html
 	@echo "Coverage report: $(BIN_DIR)/coverage.html"
+	# Auto-open the report in the browser if on macOS
+	@if [ "$$(uname)" = "Darwin" ]; then open $(BIN_DIR)/coverage.html; fi
 
 ## lint: Run golangci-lint
 .PHONY: lint
