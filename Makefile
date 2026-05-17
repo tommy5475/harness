@@ -92,6 +92,6 @@ clean:
 	@echo "Cleaned $(BIN_DIR)"
 
 ## ci: Run all checks performed in CI (fmt, vet, lint, test)
-# Note: skipping fmt in ci locally since my editor handles formatting on save
+# Note: including fmt in ci so the pipeline catches any unformatted files I missed
 .PHONY: ci
-ci: vet lint test
+ci: fmt vet lint test
